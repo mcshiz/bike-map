@@ -1,0 +1,12 @@
+
+<div ng-controller="MainCtrl" class="row map">
+  <div class="col-xs-2" id='content-window'>
+
+</div>
+  <div class="col-xs-10 map ">
+<div><button ng-click="getLocation()" id="get-location">Location</button></div>
+<map center="{{map.coords}}" zoom='{{map.zoom}}'>
+   <kml-layer ng-repeat="layer in layers" url="{{layer.url}}" suppressInfoWindows="false" on-click="showInContextWindow()"></kml-layer>
+</map>
+  </div>
+</div>
