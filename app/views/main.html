@@ -1,6 +1,15 @@
+        <div id="sidr" >
+          
+            <span class="layer-menu " style="display: inline-block; font-size: 2em;float: right;margin-right: 10px;margin-top: 10px;margin-bottom: 10px;"><b class="glyphicon glyphicon-remove sidr-close"></b></span><br>
+            <span class="layer-title text-center" style="width:100%; display: inline-block; font-size:2em; border-bottom: 3px solid #0D4A0E; border-top: 3px solid #0D4A0E;padding: 5px 0px;"></span><br>
+            <span class="layer-info" style="margin-left: 10px; margin-right: 10px;display: inline-block;font-size: 1.25em;margin-top: 15px;"></span>
+          </ul>
+        </div>
 <div class="row">
 	<div class="col-xs-6 infoWindow"></div>
-	<div class="col-xs-6"><button ng-click="getLocation()" id="get-location">Location</button></div>
+	<div class="col-xs-6"><button class='btn btn-primary tracking-btn' ng-click="getLocation()" id="get-location">Location
+    <b ng-show="tracking" class="glyphicon glyphicon-screenshot tracking-icon"></b></button>
+  </div>
 </div>
 <div ng-controller="MainCtrl" class="row map">
   <div class="map-container col-xs-12" style="position:fixed">

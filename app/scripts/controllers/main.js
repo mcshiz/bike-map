@@ -10,14 +10,15 @@
 angular.module('bikeMapApp')
   .controller('MainCtrl', function ($scope) {
 
-    var kmlUrl = 'http://www.mcshiz.com/bike-map/layers/gateway.kmz';
-    var kmlUrl2 = 'http://www.mcshiz.com/bike-map/layers/eight-mile.kmz';
- 
   $scope.$on('mapInitialized', function(event, map) {
   $scope.map = { 
     coords: '41.349700, -122.312284',
     zoom: '12',
   }
+
+
+
+
 
    var layer = [
     {
@@ -28,7 +29,7 @@ angular.module('bikeMapApp')
     {
       name: 'Gateway',
       url: 'http://www.mcshiz.com/bike-map/layers/gateway.kmz',
-      info: 'This is the gateway loop..most pop xc trail'
+      info: 'This is the gateway loop.most pop xc trail',
     }]
 
     var lay = [];
@@ -41,40 +42,138 @@ angular.module('bikeMapApp')
     lay[index].setMap(map);
 
     google.maps.event.addListener(lay[index], 'click', function(kmlEvent) {
-      showInContextWindow(val.info);
+      showInContextWindow(val.name, val.info);
     });
   });
 
-  $scope.getLocation = function(){
-    if(navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition(function(position) {
-        var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-        map.panTo(latLng);
+
+  $('#simple-menu').sidr({
+      displace: false,
     })
-  }
-}
-
-var watchID = null;
-
+  $('.sidr-close').on('click', function(){
+    $.sidr('close');
+    $scope.sidrOpen = false;
+});
+	$scope.tracking = false;
 $scope.getLocation = function(){
+	$scope.tracking = !$scope.tracking;
+	locationBtn();
+	findLocation($scope.tracking);
+}
+
+var locationBtn = function(value){
+	$('.tracking-btn').toggleClass('btn-success');
+}
+
+var findLocation = function(value){
   var options = {frequency: 5000};
-  watchID = navigator.geolocation.watchPosition(onSuccess, onError, options);
+  if (value === true) {
+  	$scope.locationMarker = null;
+    if (navigator.geolocation) {
+      
+      navigator.geolocation.getCurrentPosition(
+               function( position ){
+                    if ($scope.locationMarker){
+                        return;
+                    }
+
+                    // Add a marker to the map using the position.
+                    $scope.locationMarker = addMarker(
+                        position.coords.latitude,
+                        position.coords.longitude
+                    );
+
+                },
+          function( error ){
+              console.log( "Something went wrong: ", error );
+          },
+          {
+              timeout: (5 * 1000),
+              maximumAge: (1000 * 60 * 15),
+              enableHighAccuracy: true
+          }
+      );
+
+      $scope.positionTimer = navigator.geolocation.watchPosition(
+          function( position ){
+              updateMarker(
+                  $scope.locationMarker,
+                  position.coords.latitude,
+                  position.coords.longitude
+              );
+
+          }
+      );
+
+
+      // If the position hasn't updated within 5 minutes, stop
+      // monitoring the position for changes.
+      setTimeout(
+          function(){
+              // Clear the position watcher.
+              navigator.geolocation.clearWatch( $scope.positionTimer );
+          },
+          (1000 * 60 * 5)
+      );
+
+  }
+	} else {
+		//toggle location off
+		navigator.geolocation.clearWatch( $scope.positionTimer );
+		removeMarker($scope.locationMarker);
+	}
+}  
+
+
+
+function addMarker( latitude, longitude){
+  var marker = new google.maps.Marker({
+      map: map,
+      position: new google.maps.LatLng(
+          latitude,
+          longitude
+      ),
+  });
+  updateMapPosition(latitude, longitude);
+  return( marker );
 }
-function onSuccess(position){
-  
+
+function removeMarker( marker ) {
+	marker.setMap(null);
 }
 
+function updateMarker( marker, latitude, longitude){
+  // Update the position.
+  marker.setPosition(
+      new google.maps.LatLng(
+          latitude,
+          longitude
+      )
+  );
+  updateMapPosition(latitude, longitude);
+}
 
-
+function updateMapPosition(latitude, longitude){
+	    var latLng = new google.maps.LatLng(latitude, longitude);
+    	map.panTo(latLng);
+};
 
 
   }); //end mapInitialized
 
 
 
-
-  var showInContextWindow = function(info) {
-    $('.infoWindow').text(info);
+  $scope.sidrOpen = false;
+  var showInContextWindow = function(title, info) {
+    $('#sidr .layer-title').text(title);
+    $('#sidr .layer-info').text(info);	
+    console.log($scope.sidrOpen)
+    if ($scope.sidrOpen !== true){
+	    $.sidr(function(){
+	    	$scope.sidrOpen = true
+	    })
+      $scope.sidrOpen = true;
+    };
   };//end showincontext
 
 
