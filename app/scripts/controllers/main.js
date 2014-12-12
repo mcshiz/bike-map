@@ -27,7 +27,7 @@ var geoXmlDoc = null;
                     afterParse: useTheData
                 });
 
-geoXml.parse('http://localhost:9000/scripts/doc.kml');
+geoXml.parse('/layers/doc.kml');
 
 
 
@@ -55,10 +55,10 @@ console.log(placemark.polyline)
 }
     if (placemark.marker) {
       if (placemark.marker.id == "start") {
-      placemark.marker.setOptions({icon: "/images/start-flag.png"})
+      placemark.marker.setOptions({icon: "images/start-flag.png"})
     }
       if (placemark.marker.id == "end") {
-      placemark.marker.setOptions({icon: "/images/end-flag.png"})
+      placemark.marker.setOptions({icon: "images/end-flag.png"})
     }
       hideMarker(placemark.marker, i);
     }
