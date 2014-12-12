@@ -16,6 +16,55 @@ angular.module('bikeMapApp')
     zoom: '12',
   }
 
+var geoXml = null;
+var geoXmlDoc = null;
+
+
+   geoXml = new geoXML3.parser({
+                    map: map,
+                    singleInfoWindow: true,
+                    afterParse: useTheData
+                });
+
+geoXml.parse('http://localhost:9000/scripts/doc.kml');
+
+function highlightPoly(poly) {
+    google.maps.event.addListener(poly,"mouseover",function() {
+      poly.setOptions({fillColor: "#00ff04", strokeColor: "#00ff04"});
+    });
+    google.maps.event.addListener(poly,"mouseout",function() {
+      poly.setOptions({fillColor: "#FF0000", strokeColor: "#FF0000", fillOpacity: 0.3});
+    });
+}  
+// function kmlHighlightPoly(poly) {
+//    for (var i=0;i<geoXmlDoc.gpolygons.length;i++) {
+//      if (i == poly) {
+//        geoXmlDoc.gpolygons[i].setOptions({fillColor: "#0000FF", strokeColor: "#0000FF"});
+//      } else {
+//        geoXmlDoc.gpolygons[i].setOptions({fillColor: "#FF0000", strokeColor: "#FF0000"});
+//      }
+//    }
+// }
+
+
+    function useTheData(doc) {
+      // Geodata handling goes here, using JSON properties of the doc object
+        doc[0].placemarks[1].polyline.setOptions({fillColor: "#9999", strokeColor: "#9999", fillOpacity: 1.0});
+    };
+
+function kmlShowPoly(poly) {
+   for (var i=0;i<geoXmlDoc.gpolygons.length;i++) {
+     if (i == poly) {
+       geoXmlDoc.gpolygons[i].setMap(map);
+       geoXmlDoc.markers[i].setMap(map);
+     } else {
+       geoXmlDoc.gpolygons[i].setMap(null);
+       geoXmlDoc.markers[i].setMap(null);
+     }
+   }
+}
+
+
 
 
 
@@ -23,7 +72,7 @@ angular.module('bikeMapApp')
    var layer = [
     {
       name: 'Eight-mile',
-      url: 'http://www.mcshiz.com/bike-map/layers/eight-mile.kmz', 
+      url: 'http://www.mcshiz.com/bike-map/layers/gateway.kmz', 
       info: 'this is the 8-mile trail... its a classic'
     },
     {
