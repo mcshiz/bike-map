@@ -8,7 +8,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 <name><![CDATA[8 Mile Downhill]]></name>
 <atom:author><atom:name><![CDATA[Created by Google My Tracks on Android]]></atom:name></atom:author>
 <Style id="track">
-<LineStyle><color>387243</color><width>4</width></LineStyle>
+<LineStyle><strokeColor>387243</strokeColor><width>4</width></LineStyle>
 <IconStyle>
 <scale>1.3</scale>
 <Icon><href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href></Icon>
@@ -45,7 +45,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 <displayName><![CDATA[Heart rate (bpm)]]></displayName>
 </gx:SimpleArrayField>
 </Schema>
-<Placemark>
+<Placemark id="start">
 <name><![CDATA[8 Mile Downhill (Start)]]></name>
 <description><![CDATA[]]></description>
 <TimeStamp><when>2013-05-19T19:57:44.793Z</when></TimeStamp>
@@ -54,7 +54,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 <coordinates>-122.258652,41.335652,1785.199951171875</coordinates>
 </Point>
 </Placemark>
-<Placemark id="tour">
+
 <name><![CDATA[8 Mile Downhill]]></name>
 <description><![CDATA[]]></description>
 <styleUrl>#track</styleUrl>
@@ -66,10 +66,15 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 <gx:interpolate>1</gx:interpolate>
 <gx:Track>
 	<Placemark id="pm251">
+              	<name><![CDATA[8 Mile]]></name>
+              	<distance><![CDATA[5.5 miles]]></distance>
+              	<description><![CDATA[very popular ride, best in spring and fall]]></description>
+
 <Polygon id="g868">
 	<styleUrl>#track</styleUrl>
             <altitudeMode>absolute</altitudeMode>
               <LineString>
+
                 <coordinates>
 <when>2013-05-19T19:57:44.793Z</when>
 <gx:coord>-122.258652,41.335652 1785.199951171875</gx:coord>
@@ -2861,35 +2866,15 @@ xmlns:atom="http://www.w3.org/2005/Atom">
     </Placemark>
 </gx:Track>
 </gx:MultiTrack>
-</Placemark>
-<Placemark>
-<name><![CDATA[8 Mile Downhill (End)]]></name>
-<description><![CDATA[Created by Google My Tracks on Android
-
-Name: 8 Mile Downhill
-Activity type: mountain biking
-Description: -
-Total distance: 9.00 km (5.6 mi)
-Total time: 26:41
-Moving time: 25:38
-Average speed: 20.24 km/h (12.6 mi/h)
-Average moving speed: 21.07 km/h (13.1 mi/h)
-Max speed: 51.30 km/h (31.9 mi/h)
-Average pace: 2:58 min/km (4:46 min/mi)
-Average moving pace: 2:51 min/km (4:35 min/mi)
-Fastest pace: 1:10 min/km (1:53 min/mi)
-Max elevation: 1790 m (5873 ft)
-Min elevation: 1099 m (3605 ft)
-Elevation gain: 14 m (44 ft)
-Max grade: 5 %
-Min grade: -48 %
-Recorded: 5/19/2013 12:57pm
-]]></description>
-<TimeStamp><when>2013-05-19T20:24:23.000Z</when></TimeStamp>
+<Placemark id="end">
+<name><![CDATA[8 Mile Downhill (end)]]></name>
+<description><![CDATA[]]></description>
+<TimeStamp><when>2013-05-19T19:57:44.793Z</when></TimeStamp>
 <styleUrl>#end</styleUrl>
 <Point>
-<coordinates>-122.307547,41.31981,1099.300048828125</coordinates>
+<coordinates>-122.307547,41.31981 1099.300048828125</coordinates>
 </Point>
 </Placemark>
+
 </Document>
 </kml>

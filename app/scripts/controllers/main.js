@@ -15,60 +15,129 @@ angular.module('bikeMapApp')
     coords: '41.349700, -122.312284',
     zoom: '12',
   }
-
 var geoXml = null;
 var geoXmlDoc = null;
 
 
+
    geoXml = new geoXML3.parser({
                     map: map,
-                    singleInfoWindow: true,
+                    processStyles: true,
+                    suppressInfoWindows: true,
                     afterParse: useTheData
                 });
 
 geoXml.parse('http://localhost:9000/scripts/doc.kml');
 
-function highlightPoly(poly) {
-    google.maps.event.addListener(poly,"mouseover",function() {
-      poly.setOptions({fillColor: "#00ff04", strokeColor: "#00ff04"});
-    });
-    google.maps.event.addListener(poly,"mouseout",function() {
-      poly.setOptions({fillColor: "#FF0000", strokeColor: "#FF0000", fillOpacity: 0.3});
-    });
-}  
-// function kmlHighlightPoly(poly) {
-//    for (var i=0;i<geoXmlDoc.gpolygons.length;i++) {
-//      if (i == poly) {
-//        geoXmlDoc.gpolygons[i].setOptions({fillColor: "#0000FF", strokeColor: "#0000FF"});
-//      } else {
-//        geoXmlDoc.gpolygons[i].setOptions({fillColor: "#FF0000", strokeColor: "#FF0000"});
-//      }
-//    }
-// }
 
 
-    function useTheData(doc) {
-      // Geodata handling goes here, using JSON properties of the doc object
-        doc[0].placemarks[1].polyline.setOptions({fillColor: "#9999", strokeColor: "#9999", fillOpacity: 1.0});
-    };
 
-function kmlShowPoly(poly) {
-   for (var i=0;i<geoXmlDoc.gpolygons.length;i++) {
-     if (i == poly) {
-       geoXmlDoc.gpolygons[i].setMap(map);
-       geoXmlDoc.markers[i].setMap(map);
+function useTheData(doc){
+  var currentBounds = map.getBounds();
+  if (!currentBounds) currentBounds=new google.maps.LatLngBounds();
+  // Geodata handling goes here, using JSON properties of the doc object
+ 
+//  var sidebarHtml = '<table>';
+  geoXmlDoc = doc[0];
+  for (var i = 0; i < geoXmlDoc.placemarks.length; i++) {
+    // console.log(doc[0].markers[i].title);
+    var placemark = geoXmlDoc.placemarks[i];
+
+    if (placemark.polyline) {
+      var normalStyle = {
+          strokeColor: placemark.polyline.get('strokeColor'),
+          strokeWeight: placemark.polyline.get('strokeWeight'),
+          strokeOpacity: placemark.polyline.get('strokeOpacity')
+          };
+      placemark.polyline.normalStyle = normalStyle;
+console.log(placemark.polyline)
+      highlightPoly(placemark.polyline, i);
+}
+    if (placemark.marker) {
+      if (placemark.marker.id == "start") {
+      placemark.marker.setOptions({icon: "/images/start-flag.png"})
+    }
+      if (placemark.marker.id == "end") {
+      placemark.marker.setOptions({icon: "/images/end-flag.png"})
+    }
+      hideMarker(placemark.marker, i);
+    }
+
+/*    doc[0].markers[i].setVisible(false); */
+  }
+
+};
+
+var highlightOptions = {fillColor: "#FFFFFF",Color: "#FFFFFF", strokeColor: "#000000", fillOpacity: 0.9, strokeWidth: 10};
+var highlightLineOptions = {strokeColor: "#fa5519", strokeWidth: 10, color: "#ffffff"};
+
+function hideMarker(marker2){
+ google.maps.event.addListener(marker2, 'click', function() {
+  marker2.setOptions({icon: "/images/start-flag.png"})
+  })
+}
+
+function kmlHighlightPoly(pm) {
+   for (var i=0;i<geoXmlDoc.placemarks.length;i++) {
+     var placemark = geoXmlDoc.placemarks[i];
+     if (i == pm) {
+       if (placemark.polygon) placemark.polygon.setOptions(highlightOptions);
+       if (placemark.polyline) placemark.polyline.setOptions(highlightLineOptions);
      } else {
-       geoXmlDoc.gpolygons[i].setMap(null);
-       geoXmlDoc.markers[i].setMap(null);
+       if (placemark.polygon) placemark.polygon.setOptions(placemark.polygon.normalStyle);
+       if (placemark.polyline) placemark.polyline.setOptions(placemark.polyline.normalStyle);
      }
+   }
+}
+function kmlUnHighlightPoly(pm) {
+   for (var i=0;i<geoXmlDoc.placemarks.length;i++) {
+     if (i == pm) {
+       var placemark = geoXmlDoc.placemarks[i];
+       if (placemark.polygon) placemark.polygon.setOptions(placemark.polygon.normalStyle);
+       if (placemark.polyline) placemark.polyline.setOptions(placemark.polyline.normalStyle);
+     }
+   }
+}
+
+var on = false;
+function highlightPoly(poly, polynum) {
+  //    poly.setOptions({fillColor: "#0000FF", strokeColor: "#0000FF", fillOpacity: 0.3}) ;
+  google.maps.event.addListener(poly,"click",function() {
+    if (on === false){
+      poly.setOptions(highlightLineOptions); 
+        on = !on;
+
+        //create custom kml tags on 404 of geoxml3
+        $('#sidr .layer-title').text(poly.title);
+        $('#sidr .layer-info').html(poly.distance + "<br>" + poly.description);
+        $.sidr('open');
+    } else {
+      poly.setOptions(poly.normalStyle);
+        on = !on;
+        $.sidr('close');
+    }
+  });
+
+  google.maps.event.addListener(poly,"mouseout",function() {
+    
+  });
+}  
+
+
+function kmlPgClick(pm) {
+   if (geoXml.docs[0].placemarks[pm].polygon.getMap()) {
+      google.maps.event.trigger(geoXmlDoc.placemarks[pm].polygon,"click");
+   } else {
+      geoXmlDoc.placemarks[pm].polygon.setMap(map);
+      google.maps.event.trigger(geoXmlDoc.placemarks[pm].polygon,"click");
    }
 }
 
 
 
-
-
-
+// =======================================================================================================================
+// =======================================================================================================================
+// =======================================================================================================================
    var layer = [
     {
       name: 'Eight-mile',
