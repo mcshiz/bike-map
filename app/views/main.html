@@ -1,20 +1,86 @@
-        <div id="sidr" >
-          
-            <span class="layer-menu " style="display: inline-block; font-size: 2em;float: right;margin-right: 10px;margin-top: 10px;margin-bottom: 10px;"><b class="glyphicon glyphicon-remove sidr-close" ng-click="sidrClose(brian)"></b></span><br>
-            <span class="layer-title text-center" style="width:100%; display: inline-block; font-size:2em; border-bottom: 3px solid #0D4A0E; border-top: 3px solid #0D4A0E;padding: 5px 0px;"></span><br>
-            <span class="layer-description" style="margin-left: 10px; margin-right: 10px;display: inline-block;font-size: 1.25em;margin-top: 15px;"></span><br>
-            <span class="layer-distance" style="margin-left: 10px; margin-right: 10px;display: inline-block;font-size: 1.25em;margin-top: 15px;"></span>
-          </ul>
+
+        <div id="sidr-left" >      
+            <br>
+            <span style="width:100%; display: inline-block; font-size:1.5em; border-bottom: 3px solid #0D4A0E; border-top: 3px solid #0D4A0E;padding: 5px 0px;"><span class="layer-title text-center" ></span><b class="glyphicon glyphicon-remove sidr-close" ng-click="sidrClose(highlightedLayer)"></b>
+</span><br>
+              
+            <span class="layer-description" style="margin-left: 10px; margin-right: 10px;display: inline-block;font-size: 1em;margin-top: 15px;"></span><br>
+            <span class="layer-distance" style="margin-left: 10px; margin-right: 10px;display: inline-block;font-size: 1em;margin-top: 15px;"></span>
         </div>
+
+        <div id="sidr-right" >
+            <span class="main-menu" style="display: inline-block; font-size: 2em;margin-left: 10px;margin-top: 10px;margin-bottom: 10px;"><b class="glyphicon glyphicon-remove sidr-close" ng-click="sidrCloseRight()"></b><b class="text-muted title" style="display:inline-block; padding-left:10px">bike-Map</b></span><br>
+            <!-- <span class="main-menu"> -->
+
+              <span class="menu-item"  ng-init="$scope.xc='xc'">
+                <span class="category" style="display:inline-block">Cross-country Trails</span>
+                  <ul class="xc-trails text-center">
+                    <li ng-repeat="trail in xcTrails track by $index">                      
+                      <input class="ride-checkbox" type="checkbox" ng-model="trail.visible" ng-change="toggleTrail(trail.visible, trail.doc)">
+                      <b class="ride-name" ng-click="displayInfo(trail.trail)">{{trail.name}}</b>
+                    </li>
+                  </ul>
+              </span>
+              <span class="menu-item" ng-init="$scope.dh='dh'">
+                <span class="category" style="display:inline-block">Downhill Trails</span>
+                  <ul class="dh-trails text-center">
+                    <li ng-repeat="trail in dhTrails track by $index" >
+                      <input class="ride-checkbox" type="checkbox" ng-model="trail.visible"  ng-change="toggleTrail(trail.visible, trail.doc)" >
+                      <b class="ride-name" ng-click="displayInfo(trail.trail)">{{trail.name}}</b>
+                    </li>     
+                  </ul>  
+              </span>
+              <span class="menu-item">
+                <a class="text-center contact" ng-click="$scope.sidrCloseRight()" href="./#/contact">Contact</a>
+              </span>
+            <!-- </span> -->
+        </div>        
 <div class="row">
-	<div class="col-xs-6 infoWindow"></div>
-	<div class="col-xs-6"><button class='btn btn-primary tracking-btn' ng-click="getLocation()" id="get-location">Location
-    <b ng-show="tracking" class="glyphicon glyphicon-screenshot tracking-icon"></b></button>
+  <div class="">
+        <div class="header">
+        <h2 class="text-muted title" style="display:inline-block">bike-Map</h2>
+        <span class="beta title" style="font-size:0.7em !important; color:black">.beta</span>
+
+<span class="text-center"><button class="btn btn-default" id="menu" href="#menu">Trail Menu</button>
+<button class='btn btn-primary tracking-btn' ng-click="getLocation()" id="get-location" ><span class="tracking-text">Location</span>
+  <div class="spinner tracking-icon"></div>
+
+
+<div class="loader" title="0">
+  <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+   width="20px" height="20px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+    C22.32,8.481,24.301,9.057,26.013,10.047z">
+    <animateTransform attributeType="xml"
+      attributeName="transform"
+      type="rotate"
+      from="0 20 20"
+      to="360 20 20"
+      dur="0.5s"
+      repeatCount="indefinite"/>
+    </path>
+  </svg>
+</div>
+
+
+<script>
+  $('.contact').on('click', function){
+    $scope.bikeMenu = false;
+  }
+</script>
+
+</button></span>
+
+      </div>
+
   </div>
 </div>
-<div ng-controller="MainCtrl" class="row map">
+<div  class="row map">
   <div class="map-container col-xs-12" style="position:fixed">
-		<map center="{{map.coords}}" zoom='{{map.zoom}}'></map>
+    <map center="{{map.coords}}" zoom='{{map.zoom}}'  map-type-id='{{map.type}}'></map>
   </div>
 </div>
 

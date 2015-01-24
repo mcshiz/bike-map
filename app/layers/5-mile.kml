@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"
+xmlns:gx="http://www.google.com/kml/ext/2.2"
+xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+<open>1</open>
+<visibility>1</visibility>
+<name><![CDATA[8 Mile Downhill]]></name>
+<atom:author><atom:name><![CDATA[Created by Google My Tracks on Android]]></atom:name></atom:author>
+<Style id="track">
+<LineStyle><strokeColor>387243</strokeColor><width>4</width></LineStyle>
+<IconStyle>
+<scale>1.3</scale>
+<Icon><href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href></Icon>
+</IconStyle>
+</Style>
+<Style id="start"><IconStyle>
+<scale>1.3</scale>
+<Icon><href>http://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href></Icon>
+<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+</IconStyle></Style>
+<Style id="end"><IconStyle>
+<scale>1.3</scale>
+<Icon><href>http://maps.google.com/mapfiles/kml/paddle/red-circle.png</href></Icon>
+<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+</IconStyle></Style>
+<Style id="statistics"><IconStyle>
+<scale>1.3</scale>
+<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href></Icon>
+<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+</IconStyle></Style>
+<Style id="waypoint"><IconStyle>
+<scale>1.3</scale>
+<Icon><href>http://maps.google.com/mapfiles/kml/pushpin/blue-pushpin.png</href></Icon>
+<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+</IconStyle></Style>
+<Schema id="schema">
+<gx:SimpleArrayField name="power" type="int">
+<displayName><![CDATA[Power (W)]]></displayName>
+</gx:SimpleArrayField>
+<gx:SimpleArrayField name="cadence" type="int">
+<displayName><![CDATA[Cadence (rpm)]]></displayName>
+</gx:SimpleArrayField>
+<gx:SimpleArrayField name="heart_rate" type="int">
+<displayName><![CDATA[Heart rate (bpm)]]></displayName>
+</gx:SimpleArrayField>
+</Schema>
+<Placemark id="start">
+<name><![CDATA[5-mile (Start)]]></name>
+<description><![CDATA[]]></description>
+
+<TimeStamp><when>2013-05-19T19:57:44.793Z</when></TimeStamp>
+<styleUrl>#start</styleUrl>
+<Point>
+<coordinates>-122.271378,41.337728 </coordinates>
+</Point>
+</Placemark>
+
+<name><![CDATA[5-mile Downhill]]></name>
+<description><![CDATA[]]></description>
+<styleUrl>#track</styleUrl>
+<ExtendedData>
+<Data name="type"><value><![CDATA[mountain biking]]></value></Data>
+</ExtendedData>
+<gx:MultiTrack>
+<altitudeMode>absolute</altitudeMode>
+<gx:interpolate>1</gx:interpolate>
+<gx:Track>
+	<Placemark id="pm251">
+              	<name><![CDATA[5-mile]]></name>
+              	<distance><![CDATA[]]></distance>
+              	<description><![CDATA[5-mile trail ]]></description>
+              	<category>dh</category>
+
+<Polygon id="g868">
+	<styleUrl>#track</styleUrl>
+            <altitudeMode>clampToGround</altitudeMode>
+              <LineString>
+
+                <coordinates>
+
+-122.271378,41.337728 -122.271558,41.337675 -122.271649,41.337684 -122.271761,41.337644 -122.271864,41.337605 -122.271938,41.337539 -122.272057,41.337486 -122.272163,41.337475 -122.272253,41.337431 -122.272272,41.337381 -122.272327,41.337327 -122.272384,41.337386 -122.272439,41.337404 -122.272558,41.337356 -122.272663,41.337383 -122.272734,41.337417 -122.272851,41.337504 -122.272956,41.337531 -122.273052,41.337537 -122.273152,41.337554 -122.273241,41.337589 -122.273332,41.337628 -122.273421,41.337661 -122.273514,41.33768 -122.273608,41.337683 -122.273703,41.33769 -122.273804,41.337708 -122.273902,41.337724 -122.273999,41.337731 -122.274097,41.337731 -122.274206,41.33773 -122.274344,41.337734 -122.274446,41.337738 -122.274533,41.337691 -122.274534,41.337727 -122.274608,41.337762 -122.274702,41.337709 -122.27475,41.337693 -122.274777,41.337662 -122.274829,41.337643 -122.274866,41.33762 -122.274904,41.337595 -122.274944,41.337567 -122.274988,41.337536 -122.275047,41.337507 -122.275105,41.33747 -122.275164,41.337447 -122.275232,41.337424 -122.275303,41.337405 -122.275378,41.337393 -122.275459,41.3374 -122.275544,41.337414 -122.275634,41.337405 -122.27572,41.337389 -122.2758,41.337376 -122.27587,41.337363 -122.275939,41.337352 -122.276006,41.337334 -122.276068,41.337313 -122.27613,41.337286 -122.276195,41.337264 -122.276266,41.337252 -122.27631,41.337266 -122.27633,41.337295 -122.276379,41.337291 -122.276421,41.337294 -122.276456,41.337304 -122.276524,41.337327 -122.27656,41.337332 -122.276602,41.337338 -122.276642,41.337338 -122.27669,41.337337 -122.276741,41.337334 -122.276793,41.337325 -122.276841,41.337315 -122.276895,41.337301 -122.276956,41.337292 -122.277021,41.337286 -122.277085,41.337286 -122.277147,41.337293 -122.277211,41.337303 -122.277269,41.337316 -122.277322,41.337326 -122.27737,41.337331 
+
+                </coordinates>
+              </LineString>
+          </Polygon>
+
+    </Placemark>
+</gx:Track>
+</gx:MultiTrack>
+<Placemark id="end">
+<name><![CDATA[5-mile(end)]]></name>
+<description><![CDATA[]]></description>
+<TimeStamp><when>2013-05-19T19:57:44.793Z</when></TimeStamp>
+<styleUrl>#end</styleUrl>
+<Point>
+<coordinates>-122.27737,41.337331</coordinates>
+</Point>
+</Placemark>
+
+</Document>
+</kml>

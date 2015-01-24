@@ -404,6 +404,7 @@ var coordListA = [];
           name:  geoXML3.nodeValue(node.getElementsByTagName('name')[0]),
           distance:  geoXML3.nodeValue(node.getElementsByTagName('distance')[0]),
           description: geoXML3.nodeValue(node.getElementsByTagName('description')[0]),
+          category: geoXML3.nodeValue(node.getElementsByTagName('category')[0]),
           styleUrl: geoXML3.nodeValue(node.getElementsByTagName('styleUrl')[0]),
           id: node.getAttribute('id')
         };
@@ -838,13 +839,14 @@ var coordListA = [];
 
     // Load basic marker properties
     var markerOptions = geoXML3.combineOptions(parserOptions.markerOptions, {
-      map:      parserOptions.map,
-      position: new google.maps.LatLng(placemark.Point.coordinates[0].lat, placemark.Point.coordinates[0].lng),
-      title:    placemark.name,
-      distance:     placemark.distance,
-      zIndex:   Math.round(placemark.Point.coordinates[0].lat * -100000)<<5,
-      icon:     placemark.style.icon,
-      shadow:   placemark.style.shadow 
+      map:        parserOptions.map,
+      position:   new google.maps.LatLng(placemark.Point.coordinates[0].lat, placemark.Point.coordinates[0].lng),
+      title:      placemark.name,
+      distance:   placemark.distance,
+      category:   placemark.category,
+      zIndex:     Math.round(placemark.Point.coordinates[0].lat * -100000)<<5,
+      icon:       placemark.style.icon,
+      shadow:     placemark.style.shadow 
     });
   
     // Create the marker on the map

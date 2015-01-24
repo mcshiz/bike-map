@@ -8,7 +8,8 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 <name><![CDATA[Gateway Loop]]></name>
 <atom:author><atom:name><![CDATA[Created by Google My Tracks on Android]]></atom:name></atom:author>
 <Style id="track">
-<LineStyle><strokeColor>387243</strokeColor><width>4</width></LineStyle>
+	<strokeColor>219112</strokeColor>
+<LineStyle><width>4</width></LineStyle>
 <IconStyle>
 <scale>1.3</scale>
 <Icon><href>http://earth.google.com/images/kml-icons/track-directional/track-0.png</href></Icon>
@@ -48,6 +49,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 <Placemark id="loop">
 <name><![CDATA[Gateway Loop (Start)]]></name>
 <description><![CDATA[]]></description>
+
 <TimeStamp><when>2014-08-22T00:44:44.885Z</when></TimeStamp>
 <styleUrl>#start</styleUrl>
 <Point>
@@ -68,6 +70,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
               	<name><![CDATA[Gateway Loop]]></name>
               	<distance><![CDATA[9.2 miles]]></distance>
               	<description><![CDATA[This is the areas most popular cross-country ride. Well documented with plenty of trail options along the way]]></description>
+              	<category>xc</category>
 
 <Polygon id="g868">
 	<styleUrl>#track</styleUrl>
