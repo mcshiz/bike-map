@@ -88,13 +88,13 @@ xmlns:atom="http://www.w3.org/2005/Atom">
     </Placemark>
 </gx:Track>
 </gx:MultiTrack>
-<Placemark id="">
+<Placemark id="end">
 <name><![CDATA[Cliff Hanger(end)]]></name>
 <description><![CDATA[]]></description>
 <TimeStamp><when>2013-05-19T19:57:44.793Z</when></TimeStamp>
 <styleUrl>#end</styleUrl>
 <Point>
-<coordinates>-122.28392,41.330792</coordinates>
+<coordinates>-122.28055,41.331124</coordinates>
 </Point>
 </Placemark>
 

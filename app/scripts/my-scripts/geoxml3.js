@@ -234,8 +234,9 @@ function processStyle(thisNode, styles, styleID) {
       var styleNodes = thisNode.getElementsByTagName('IconStyle');
       if (!!styleNodes && !!styleNodes.length && (styleNodes.length > 0)) {
         styles[styleID].scale = parseFloat(nodeValue(styleNodes[0].getElementsByTagName('scale')[0]));
+        styles[styleID].visibility = nodeValue(styleNodes[0].getElementsByTagName('visibility')[0]);
       }
-      if (isNaN(styles[styleID].scale)) styles[styleID].scale = 1.0;
+      if (isNaN(styles[styleID].scale)) styles[styleID].scale = 0.5;
       styleNodes = thisNode.getElementsByTagName('Icon');
       if (!!styleNodes && !!styleNodes.length && (styleNodes.length > 0)) {
         styles[styleID].href = nodeValue(styleNodes[0].getElementsByTagName('href')[0]);
@@ -255,6 +256,7 @@ function processStyle(thisNode, styles, styleID) {
       }
       return styles[styleID];
 }
+
 
 // from http://stackoverflow.com/questions/122102/what-is-the-most-efficient-way-to-clone-a-javascript-object
 // http://keithdevens.com/weblog/archive/2007/Jun/07/javascript.clone
@@ -846,7 +848,8 @@ var coordListA = [];
       category:   placemark.category,
       zIndex:     Math.round(placemark.Point.coordinates[0].lat * -100000)<<5,
       icon:       placemark.style.icon,
-      shadow:     placemark.style.shadow 
+      shadow:     placemark.style.shadow, 
+      scale:      placemark.style.scale 
     });
   
     // Create the marker on the map
@@ -929,6 +932,8 @@ var createPolyline = function(placemark, doc) {
     title:    placemark.name,
     distance:    placemark.distance,
     description:    placemark.description,
+
+
   });
   if (paths.length > 1) {
     polyOptions.paths = paths;

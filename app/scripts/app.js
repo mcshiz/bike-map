@@ -10,13 +10,12 @@
  */
 angular
   .module('bikeMapApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
     'ngRoute',
     'ngSanitize',
+    'LocalStorageModule',     
     'ngTouch',
     'ngMap',
+    'firebase',
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -32,4 +31,9 @@ angular
         redirectTo: '/'
       });
   })
+  .config(function (localStorageServiceProvider) {
+  localStorageServiceProvider
+    .setPrefix('bikeMapApp')
+    .setNotify(true, true)
+});
 

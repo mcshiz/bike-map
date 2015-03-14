@@ -67,7 +67,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 <gx:interpolate>1</gx:interpolate>
 <gx:Track>
 	<Placemark id="pm251">
-              	<name><![CDATA[5-mile]]></name>
+              	<name><![CDATA[5 Mile]]></name>
               	<distance><![CDATA[]]></distance>
               	<description><![CDATA[5-mile trail ]]></description>
               	<category>dh</category>

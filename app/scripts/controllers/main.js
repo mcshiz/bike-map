@@ -8,9 +8,9 @@
  * Controller of the bikeMapApp
  */
 angular.module('bikeMapApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $location, $firebaseObject, localStorageService) {
 
-
+ 
 
 
 
@@ -22,15 +22,15 @@ angular.module('bikeMapApp')
     type: "TERRAIN"
   }
   $scope.myMap = map;
-  console.log("init'ing")
   $scope.bikeMenu = false;
 }); //end mapInitialized
 
 
-$scope.dhTrails = [];
-$scope.xcTrails = [];  
+$scope.myTrails = [];
+
 var geoXml = null;
 var geoXmlDoc = [];
+
 var layers = [
       './layers/gateway.kml', 
       './layers/8-mile.kml', 
@@ -48,6 +48,27 @@ var layers = [
 
 
 
+// $.each($scope.myTrails, function(index, val) {
+//    addToLocalStorage(index, obj)
+// });
+
+// var addToLocalStorage = function(key, val) {
+//   if(localStorageService.isSupported) {
+//    var tmp = JSON.stringify(val)
+//       return localStorageService.set(key, val);
+//   } else {
+//     console.log("boo not supported");
+//   }
+// }
+// var lsKeys = localStorageService.keys();
+// $.each(lsKeys, function(index, val) {
+//  getItem(key)
+// });
+
+// function getItem(key) {
+//    return localStorageService.get(key);
+//   }
+
 geoXml = new geoXML3.parser({
         map: $scope.myMap,
         processStyles: true,
@@ -55,54 +76,45 @@ geoXml = new geoXML3.parser({
         afterParse: useTheData
        });
 
+
 geoXml.parse(layers);
 
 
 function useTheData(doc){
   for (var l = 0; l<doc.length; l++){
     geoXmlDoc[l] = doc[l];
-
-    if (doc[l].placemarks[1].category == 'dh'){
-      $scope.dhTrails.push(
+    doc[l].doc = l;
+    
+      $scope.myTrails.push(
         {
           map: $scope.myMap,
           doc: l,
+          category: doc[l].placemarks[1].category,
           layer:doc[l], 
-          name: doc[l].placemarks[1].name,
+          name: $.trim(doc[l].placemarks[1].name),
           visible: true,
           trail: doc[l].placemarks[1].polyline,
         });
       $scope.$apply()
-    };
-    if (doc[l].placemarks[1].category == 'xc'){
-      $scope.xcTrails.push({
-        map: $scope.myMap,
-        doc: l,
-        layer:doc[l],
-        name: doc[l].placemarks[1].name,
-        visible: true,
-        trail: doc[l].placemarks[1].polyline,
-      });
-      $scope.$apply()
-    };
+
 
     for (var i = 0; i < geoXmlDoc[l].placemarks.length; i++) {
-      // console.log(doc[0].markers[i].title);
       var placemark = geoXmlDoc[l].placemarks[i];    
       if (placemark.polyline) {
         var normalStyle = {
             strokeColor: placemark.polyline.get('strokeColor'),
             strokeWeight: placemark.polyline.get('strokeWeight'),
-            strokeOpacity: placemark.polyline.get('strokeOpacity')
+            strokeOpacity: placemark.polyline.get('strokeOpacity'),
             };
+        
         placemark.polyline.normalStyle = normalStyle;
-        highlightPoly(placemark.polyline, i, geoXmlDoc[l] );
+        highlightPoly(placemark.polyline, i, geoXmlDoc[l], l );
       }
 
       if (placemark.marker) {
         if (placemark.marker.id == "start") {
-          placemark.marker.setOptions({map: $scope.myMap, icon: "images/start-flag.png"})
-        }
+          placemark.marker.setOptions({map: $scope.myMap, icon: "images/start-flag.png", scale: 0.5})
+          }
         if (placemark.marker.id == "end") {
           placemark.marker.setOptions({map: $scope.myMap, icon: "images/end-flag.png"})
         }
@@ -111,17 +123,50 @@ function useTheData(doc){
         }   
         highlightMarker(placemark.marker, i, geoXmlDoc[l] ) 
       };// end if marker
+
+
     };//end placemarks for loop
     $scope.showDocument(geoXmlDoc[l])
   };//end doc for loop
-
 };//end use the data
+//========================================================================================================================
+//========================================================================================================================
+//========================================================================================================================
+var ref = new Firebase("https://bike-map.firebaseio.com/comments/trail");
 
+var obj = $firebaseObject(ref);
+
+  obj.$loaded().then(function() {
+  $('.comment-section').html("");
+  $scope.addComments();
+  return obj;
+});
+
+
+$scope.addComments = function() {
+  for (var i in $scope.myTrails) {
+    angular.forEach(obj, function(key, value){
+      if (value == $scope.myTrails[i].name){
+       $scope.myTrails[i].comments = key;
+      }
+    });
+  }
+};
+
+$scope.newComment = function(){
+  var newCommentNumber = $scope.numberOfComments + 1
+  var trailRef = ref.child($scope.currentHighlightedLayer.name+'/c'+newCommentNumber).set({comment: "new Comment", name: "Marley - Bob", date: "March 13, 2015"});
+  console.log(trailRef)
+  
+}
 
 
 //========================================================================================================================
 //========================================================================================================================
 //========================================================================================================================
+
+
+
 
 
 $scope.toggleTrail = function(visible, trail){
@@ -132,10 +177,7 @@ $scope.toggleTrail = function(visible, trail){
   };
 };
 
-$scope.toggleCategory = function(visible, category){
-        console.log(category)
-        console.log(visible + "show")
-};
+
 
 $scope.showDocument = function (doc) {
     if (!doc) doc = doc[0];
@@ -167,6 +209,7 @@ $scope.hideDocument = function (doc) {
   if (!doc) doc = doc[0];
   // Hide the map objects associated with a document
   var i;
+
   if (!!doc.markers) {
     for (i = 0; i < doc.markers.length; i++) {
       if(!!doc.markers[i].infoWindow) doc.markers[i].infoWindow.close();
@@ -192,34 +235,85 @@ $scope.hideDocument = function (doc) {
   }
 };
 
-var highlightOptions = {fillColor: "#FFFFFF",Color: "#FFFFFF", strokeColor: "#000000", fillOpacity: 0.9, strokeWidth: 10};
+var highlightOptions = {fillColor: "#FFFFFF",Color: "#FFFFFF", strokeColor: "#083972", fillOpacity: 0.9, strokeWidth: 10};
 var highlightLineOptions = {strokeColor: "#fa5519", strokeWidth: 10, color: "#ffffff"};
+var hidden = {visibility: 0};
 
 var on = false;
 
-function highlightPoly(poly, polynum, layer) {
+function highlightPoly(poly, polynum, layer, layerNumber) {
   google.maps.event.addListener(poly,"click",function() {
     $scope.displayInfo(poly)
-  });
+    $scope.currentHighlightedLayer = $scope.myTrails[layer.doc];
+    $scope.hideOtherMarkers(layer);
+    $('.comment-section').html("")
+    $scope.showComments(layer, layerNumber)
+  }); 
 }
 
-function highlightMarker(marker, polynum, layer) {
+function highlightMarker(marker, polynum, layer, layerNumber) {
   google.maps.event.addListener(marker,"click",function() {
     var trail = layer.placemarks[1].polyline;
-    $scope.displayInfo(trail);
+    $scope.displayInfo(trail, marker);
+    $scope.currentHighlightedLayer = $scope.myTrails[layer.doc];
+    $scope.hideOtherMarkers(layer);
+    $('.comment-section').html("")
+    $scope.showComments(layer)
+      
   });
 };
 
-$scope.log = function(poly){
-  console.log(poly);
+
+$scope.showComments = function(layer){
+  // $('#sidr-left .layer-comments').text(comments); 
+  var d = new Date();
+  d = d.toString();
+
+  
+  var layercomments = $scope.myTrails[layer.doc].comments;
+  $scope.numberOfComments = 0
+  
+     angular.forEach(layercomments, function(key, value){
+        $scope.numberOfComments++;
+        console.log(layercomments)
+        $('.comment-section').append("<div class='comment-box'><span class='username'>"+key.name+" said:</span><br>"+"<span class='comment'>"+key.comment+"</span><br><span class='date'>"+key.date+"</div><br><br>");
+        $('.numberOfComments').html($scope.numberOfComments);
+    })
 }
-$scope.displayInfo = function(poly){
-    if ($scope.highlightedLayer){
+
+
+$scope.hideOtherMarkers = function(layer){
+  for (var i=0; i < $scope.myTrails.length; i++){
+    var m = 0;
+    while (typeof geoXmlDoc[i].markers[m] != 'undefined'){
+        geoXmlDoc[i].markers[m].setMap($scope.myMap);
+        m++;
+    }
+  }
+  if(typeof(layer) !== 'undefined'){
+    for (var i=0; i < $scope.myTrails.length; i++){
+      if (geoXmlDoc[i].doc != layer.doc ){
+        var m = 0;
+        while (typeof geoXmlDoc[i].markers[m] != 'undefined'){
+            geoXmlDoc[i].markers[m].setMap(null);
+            m++;
+        }
+      }
+    }
+  } 
+return;
+};
+
+
+
+
+$scope.displayInfo = function(poly, layer){
+    if (!!$scope.highlightedLayer){
       $scope.unHighlightPoly($scope.highlightedLayer);
       $scope.highlightedLayer = null;
     }
     if (on === false){
-      poly.setOptions(highlightLineOptions); 
+      poly.setOptions(highlightLineOptions);
       $scope.highlightedLayer = poly;
       on = !on;
       showInContextWindow(poly.title, poly.description, poly.distance)
@@ -228,11 +322,14 @@ $scope.displayInfo = function(poly){
       $scope.unHighlightPoly(poly)
       $scope.sidrClose(on, poly)
     }
+    $scope.hideOtherMarkers(layer);
 };
 
 $scope.unHighlightPoly = function(poly) {
   poly.setOptions(poly.normalStyle);
   on = !on;
+    
+  $scope.currentHighlightedLayer = null;
 };
 
 
@@ -265,7 +362,7 @@ var locationBtn = function(){
 }
 
 var findLocation = function(value){
-  var options = {frequency: 5000};
+  var options = {frequency: 10000};
   if (value === true) {
   	$scope.locationMarker = null;
     if (navigator.geolocation) {
@@ -275,11 +372,10 @@ var findLocation = function(value){
 
             return;
           }
-
-
           $('.loader').css('display', 'none');
           $('.tracking-icon').css('display', 'inline-block');
           // Add a marker to the map using the position.
+          updateMapPosition(position.coords.latitude,position.coords.longitude);
           $scope.locationMarker = addLocationMarker(position.coords.latitude,position.coords.longitude);
         },
         function( error ){
@@ -330,7 +426,7 @@ function addLocationMarker( latitude, longitude){
       ),
   });
 
-  updateMapPosition(latitude, longitude);
+  
     var myLat = latitude.toString().substring(0,13);
     var myLong = longitude.toString().substring(0,13);
     var content = "Lat: "+ myLat + '<br>' + "Long: "+ myLong  ;
@@ -366,7 +462,7 @@ function updateMarker( marker, latitude, longitude){
           longitude
       )
   );
-  updateMapPosition(latitude, longitude);
+  // updateMapPosition(latitude, longitude);
 }
 
 function updateMapPosition(latitude, longitude){
@@ -388,6 +484,7 @@ function updateMapPosition(latitude, longitude){
 
 
 
+
   $('#simple-menu').sidr({
       name:"sidr-left",
       displace: false,
@@ -405,38 +502,34 @@ function updateMapPosition(latitude, longitude){
       side: "right",
     });
 
-  // $('.menu-item').on('click','li', function(trail){
-  //   $scope.displayInfo(poly)
-  // })
   var on = false;
 
-//   window.addEventListener('orientationchange', function() {
-//     if (window.innerHeight < window.innerWidth) {
-//       $('.header').toggleClass('landscape');
-//       $('.header .title').toggleClass('hidden');
-//     }
-// });
 
-
-
-
-var showInContextWindow = function(title, description, distance) {
+var showInContextWindow = function(title, description, distance, comments) {
   $('#sidr-left .layer-title').text(title);
   $('#sidr-left .layer-description').text(description);	
-  $('#sidr-left .layer-distance').text(distance); 
+  $('#sidr-left .layer-distance').text(distance);
 };//end showincontext
 
 $scope.sidrClose = function(poly){
   if (poly){
     $scope.unHighlightPoly(poly);
     $scope.highlightedLayer = null;
+    $scope.hideOtherMarkers();
   }
+
   $.sidr('close', 'sidr-left');
   $('#sidr-left .layer-title').text("");
   $('#sidr-left .layer-description').text("");
   $('#sidr-left .layer-distance').text("");
+  $('.comment-section').html("")
+  if ($scope.sidrExpand() == true){
+    $scope.sidrExpand();
+  } else {
+    return;
+  }
 }
-$scope.sidrCloseRight = function(poly){
+$scope.sidrCloseRight = function(){
   $.sidr('close', 'sidr-right');
 }
 //========================================================================================================================
@@ -444,5 +537,23 @@ $scope.sidrCloseRight = function(poly){
 //========================================================================================================================
 
 
+$scope.sidrExpand = function () {
+  $('#sidr-left').toggleClass('expand');
+  if($('#sidr-left').hasClass('expand')){
+    $('#sidr-left').animate({height: "75%"}, 500 );
+    $('.sidr-expand').css({transform: 'rotate(180deg)'});
+    return true;
+  } else {
+    $('#sidr-left').animate({height: "150px"}, 500 );
+    $('.sidr-expand').css({transform: 'rotate(0deg)'});
+    return false;
+  }
+}
+
+        $scope.changeView = function(view){
+            $scope.sidrCloseRight();
+            $location.path(view); // path not hash
+        }
+    
 
 });//end mainCtrl

@@ -2,7 +2,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
-
+$orage: #fa5519;
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -14,6 +14,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  margin: inherit;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -73,12 +74,21 @@ body {
   .container {
     max-width: 730px;
   }
+  @media device and (max-width: 370px){
+    .header .btn-default {
+      display: block;
+      float: left;
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+  }
 
   /* Remove the padding we set earlier */
   .header,
   .marketing,
   .footer {
     padding-left: 0;
+    margin: inherit;
     padding-right: 0;
   }
   /* Space out the masthead */
@@ -109,14 +119,59 @@ map {
   font-size: 1.2em;
   vertical-align: middle;
 }
-.sidr-close {
+
+.sidr-close, .sidr-expand {
   cursor: pointer;
-  float: right;
-  margin-right: 5%;
+  &:hover {
+    color: $orage;
+  }
 }
-.sidr-close:hover {
-  color: #fa5519
+.main-menu {
+  .sidr-close {
+    right: 0.5em;
+    margin-right: 1em;  
+    margin-top: 15px;
+    position: absolute;
+    padding-left: 10px;
+  }
 }
+#sidr-left {
+  bottom: 0px;
+  width: 100%;
+  height: 150px;
+  right: auto;
+  top: inherit;
+    .sidr-close {
+      right: 2em;
+      top: 1.6em;
+      position: absolute;
+    }
+    .sidr-expand {
+      display: inline-block;
+      position: relative;
+    }
+    .sidr-close:hover, .sidr-expand:hover {
+      color: $orage;
+    }
+    .comments {
+      font-size: 0.65em;
+      padding-left: 0.35em;
+        a {
+          cursor: pointer
+        }
+    }
+    .left {
+      margin-left: 2em;
+      position: absolute;
+    }
+
+}
+    .expanded {
+      height: 75% !important;
+    }
+
+
+
 input[type=checkbox]
 {
   /* Double-sized Checkboxes */
@@ -167,25 +222,36 @@ margin-bottom: 10px;
 display: block !important;
 letter-spacing: 0.1em;
 font-weight: 100;
+color: #ff8c29;
 width: 86%;
 right: 0px !important;
 left: inherit;
 position: relative;
 margin-right: 0px !important;
 }
-.sidr.left {
-bottom: 0px;
-width: 100%;
-height: 150px;
-right: auto;
-top: inherit;
- .glyphicon {
-  line-height: 1.5em;
- }
-}
 
-.layer-title{
-  margin-left: 45%;
+
+.layer-description, .layer-distance, .comment-section {
+  display: inline-block;
+  font-size: 1em;
+  padding: 0.5em 2.5em;
+}
+.layer-distance {
+  margin-top: 15px;
+}
+.comment-section {
+  width: 100%;
+  .comment-box {
+    width: 100%;
+    padding: 1em;
+    background-color: gray;
+    border: 1px solid white;
+
+  }
+}
+.add-comment {
+  padding-left: 2.5em;
+  cursor: pointer;
 }
 .spinner {
 width: 15px;
@@ -230,13 +296,19 @@ margin-bottom: 13px;
 .sidr-left {
   width: 20% !important;
 }
-.sidr-close
+
 .contact {
+  cursor: pointer;
   display: block;
   padding: 10px 15px;
   position: relative;
   font-size: 1.5em;
+  text-decoration: underline;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.1em;
 }
+
 .landscape {
   position: absolute;
   display: block;
@@ -257,4 +329,30 @@ margin-bottom: 13px;
 svg path,
 svg rect{
   fill: #FF6700;
+}
+
+.btn-primary {
+  background-color: #ff8c29;
+  border-radius: 3px;
+  &:hover {
+    background-color: #ff8c29;
+  }
+  &:focus {
+    background-color: #ff8c29;
+  }  
+}
+.btn-default {
+  border-color: #ff8c29;
+  background-color: #2e6da4;
+  border-radius: 3px;
+  color: #ffffff;
+  &:hover {
+    background-color: #2e6da4;
+    color: #ffffff;
+  }
+  &:focus {
+    background-color: #2e6da4;
+    color: #ffffff;
+  }
+
 }
