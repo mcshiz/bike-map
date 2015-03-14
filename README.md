@@ -6,9 +6,9 @@ Things to do:
 
 Get everything out of the controllers and seperate into directives/services/factories.
 
-Stop using two seperate objects for the layers. Include geoXmlDoc[l] into $scope.allTrails so I can keep my sanity,
+Stop using two seperate objects for the layers. Include geoXmlDoc[l] into $scope.myTrails so I can keep my sanity,
 
-Use $scope.allTrails for every function rather than passing poly, polyNum and layer around.
+Use $scope.myTrails for every function rather than passing poly, polyNum and layer around.
 
 Build modal to popup for adding new comments.
 
