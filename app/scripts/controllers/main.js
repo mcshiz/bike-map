@@ -135,7 +135,6 @@ function useTheData(doc){
 var ref = new Firebase("https://bike-map.firebaseio.com/comments/trail");
 
 var obj = $firebaseObject(ref);
-
   obj.$loaded().then(function() {
   $('.comment-section').html("");
   $scope.addComments();
@@ -154,7 +153,7 @@ $scope.addComments = function() {
 };
 
 $scope.newComment = function(){
-  var newCommentNumber = $scope.numberOfComments + 1
+  var newCommentNumber = ($scope.numberOfComments + 1);
   var trailRef = ref.child($scope.currentHighlightedLayer.name+'/c'+newCommentNumber).set({comment: "new Comment", name: "Marley - Bob", date: "March 13, 2015"});
   console.log(trailRef)
   
@@ -249,7 +248,7 @@ function highlightPoly(poly, polynum, layer, layerNumber) {
     $('.comment-section').html("")
     $scope.showComments(layer, layerNumber)
   }); 
-}
+}8 
 
 function highlightMarker(marker, polynum, layer, layerNumber) {
   google.maps.event.addListener(marker,"click",function() {
