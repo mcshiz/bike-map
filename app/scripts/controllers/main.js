@@ -8,9 +8,67 @@
  * Controller of the bikeMapApp
  */
 angular.module('bikeMapApp')
+.directive('modalDialog', function() {
+  return {
+    restrict: 'EAC',
+    scope: true,
+    replace: true, 
+    transclude: true,
+    link: function(scope, element, attrs) {
+      scope.dialogStyle = {};
+      if (attrs.width)
+        scope.dialogStyle.width = attrs.width;
+      if (attrs.height)
+        scope.dialogStyle.height = attrs.height;
+      if (attrs.show)
+        scope.shown = attrs.shown;
+
+    },
+    template: "<div class='ng-modal {{modalShown}}' >"+
+    "<div class='ng-modal-overlay' ng-click='hideModal()'></div>"+
+    "<div class='ng-modal-dialog' ng-style='dialogStyle'>"+
+      "<b class='glyphicon glyphicon-remove ng-modal-close' ng-click='hideModal()'></b>"+
+      "<div class='ng-modal-dialog-content'>"+
+        "<p>Add your comment for {{currentHighlightedLayer.name}}</p>"+
+        "<div class='input-group'>"+
+          "<span class='input-group-addon' id='name-addon'>name</span>"+
+          "<input type='text' class='form-control input-lg'  aria-describedby='name-addon' id='name'>"+
+        "</div>"+
+        "<div class='comment-textarea'>"+
+          "<textarea class='form-control input-lg' name='comment-text' id='comment-text' placeholder='Comment...'></textarea>"+
+        "</div>"+
+        "<button class='btn btn-primary input-lg form-control text-center' ng-click='addComment()'>Submit</button>"+
+      "</div>"+
+    "</div>"+
+    "</div>" 
+  };
+})
+.directive('commentArea', function() {
+  return {
+    restrict: 'EAC',
+    scope: true,
+    replace: true,
+    transclude: true,
+    link: function(scope, element, attrs) {
+    scope.$watch('currentHighlightedLayer.doc', function(obj) {
+console.log()
+      }, true);
+    },
+    template: "<div class='comment-box' ng-repeat='comment in currentHighlightedLayer.comments'>"+
+      "<span class='username'>{{comment.name}} said:</span>"+
+      "<br>"+
+      "<span class='comment'>{{comment.comment}}</span>"+
+      "<br>"+
+      "<span class='date'>{{comment.date}}</span>"+
+    "</div>"
+  };
+})
+
+
+
   .controller('MainCtrl', function ($scope, $location, $firebaseObject, localStorageService) {
 
- 
+  $scope.currentHighlightedLayer = null;
 
 
 
@@ -123,8 +181,6 @@ function useTheData(doc){
         }   
         highlightMarker(placemark.marker, i, geoXmlDoc[l] ) 
       };// end if marker
-
-
     };//end placemarks for loop
     $scope.showDocument(geoXmlDoc[l])
   };//end doc for loop
@@ -136,13 +192,13 @@ var ref = new Firebase("https://bike-map.firebaseio.com/comments/trail");
 
 var obj = $firebaseObject(ref);
   obj.$loaded().then(function() {
-  $('.comment-section').html("");
   $scope.addComments();
   return obj;
 });
 
 
 $scope.addComments = function() {
+
   for (var i in $scope.myTrails) {
     angular.forEach(obj, function(key, value){
       if (value == $scope.myTrails[i].name){
@@ -152,19 +208,48 @@ $scope.addComments = function() {
   }
 };
 
-$scope.newComment = function(){
+$scope.addComment = function(){
   var newCommentNumber = ($scope.numberOfComments + 1);
-  var trailRef = ref.child($scope.currentHighlightedLayer.name+'/c'+newCommentNumber).set({comment: "new Comment", name: "Marley - Bob", date: "March 13, 2015"});
-  console.log(trailRef)
-  
+  var commentText = $('#comment-text').val();
+  var commentName = $('#name').val();
+  var commentDate = getTodaysDate();
+  commentDate = commentDate.toString();
+  var trailRef = ref.child($scope.currentHighlightedLayer.name);
+  var newCommentRef = trailRef.child('/c'+newCommentNumber);
+  var trailCommentRefObj = $firebaseObject(newCommentRef);
+  var unwatch = trailCommentRefObj.$watch(function() {
+  console.log("data changed!");
+  })
+  newCommentRef.set({comment: commentText, name: commentName, date: commentDate});
+  $scope.hideModal();
 }
 
 
 //========================================================================================================================
 //========================================================================================================================
 //========================================================================================================================
+var getTodaysDate = function (){
+var currentYear = (new Date).getFullYear();
+var currentMonth = (new Date).getMonth() + 1;
+var currentDay = (new Date).getDate();
+var month = new Array();
+month[0] = "January";
+month[1] = "February";
+month[2] = "March";
+month[3] = "April";
+month[4] = "May";
+month[5] = "June";
+month[6] = "July";
+month[7] = "August";
+month[8] = "September";
+month[9] = "October";
+month[10] = "November";
+month[11] = "December";
+currentMonth = month[ (new Date).getMonth()];
 
+return (currentMonth + " " + currentDay +", "+ currentYear);
 
+}
 
 
 
@@ -239,14 +324,17 @@ var highlightLineOptions = {strokeColor: "#fa5519", strokeWidth: 10, color: "#ff
 var hidden = {visibility: 0};
 
 var on = false;
-
+$scope.arrgh = true;
 function highlightPoly(poly, polynum, layer, layerNumber) {
   google.maps.event.addListener(poly,"click",function() {
     $scope.displayInfo(poly)
     $scope.currentHighlightedLayer = $scope.myTrails[layer.doc];
+    console.log($scope.currentHighlightedLayer);
     $scope.hideOtherMarkers(layer);
-    $('.comment-section').html("")
     $scope.showComments(layer, layerNumber)
+$scope.arrgh = false;
+console.log($scope.arrgh)
+    $scope.$apply() 
   }); 
 }8 
 
@@ -256,26 +344,21 @@ function highlightMarker(marker, polynum, layer, layerNumber) {
     $scope.displayInfo(trail, marker);
     $scope.currentHighlightedLayer = $scope.myTrails[layer.doc];
     $scope.hideOtherMarkers(layer);
-    $('.comment-section').html("")
     $scope.showComments(layer)
-      
+    $scope.arrgh = false
+    console.log($scope.arrgh)
+      $scope.$apply() 
   });
 };
 
 
 $scope.showComments = function(layer){
-  // $('#sidr-left .layer-comments').text(comments); 
-  var d = new Date();
-  d = d.toString();
 
-  
   var layercomments = $scope.myTrails[layer.doc].comments;
   $scope.numberOfComments = 0
   
      angular.forEach(layercomments, function(key, value){
         $scope.numberOfComments++;
-        console.log(layercomments)
-        $('.comment-section').append("<div class='comment-box'><span class='username'>"+key.name+" said:</span><br>"+"<span class='comment'>"+key.comment+"</span><br><span class='date'>"+key.date+"</div><br><br>");
         $('.numberOfComments').html($scope.numberOfComments);
     })
 }
@@ -327,7 +410,6 @@ $scope.displayInfo = function(poly, layer){
 $scope.unHighlightPoly = function(poly) {
   poly.setOptions(poly.normalStyle);
   on = !on;
-    
   $scope.currentHighlightedLayer = null;
 };
 
@@ -341,12 +423,10 @@ $scope.unHighlightPoly = function(poly) {
 
 
 $scope.tracking = false;
-
 $scope.getLocation = function(){
 	$scope.tracking = !$scope.tracking;
 	locationBtn();
 	findLocation($scope.tracking);
-
 }
 
 var locationBtn = function(){
@@ -521,7 +601,7 @@ $scope.sidrClose = function(poly){
   $('#sidr-left .layer-title').text("");
   $('#sidr-left .layer-description').text("");
   $('#sidr-left .layer-distance').text("");
-  $('.comment-section').html("")
+  // $('.comment-section').html("")
   if ($scope.sidrExpand() == true){
     $scope.sidrExpand();
   } else {
@@ -549,10 +629,18 @@ $scope.sidrExpand = function () {
   }
 }
 
-        $scope.changeView = function(view){
-            $scope.sidrCloseRight();
-            $location.path(view); // path not hash
-        }
+$scope.changeView = function(view){
+    $scope.sidrCloseRight();
+    $location.path(view); // path not hash
+}
+$scope.hideModal = function() {
+  $scope.modalShown = 'ng-hide';
+};
+
+$scope.modalShown = 'ng-hide';
+$scope.toggleModal = function() {
+  $scope.modalShown = 'ng-show';
+}
     
 
 });//end mainCtrl

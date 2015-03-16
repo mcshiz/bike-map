@@ -46,7 +46,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 </gx:SimpleArrayField>
 </Schema>
 <Placemark id="start">
-<name><![CDATA[New Age Wholly Roller (Start)]]></name>
+<name><![CDATA[Everitt to Bear Springs (Start)]]></name>
 <description><![CDATA[]]></description>
 
 <TimeStamp><when>2013-05-19T19:57:44.793Z</when></TimeStamp>
@@ -69,7 +69,7 @@ xmlns:atom="http://www.w3.org/2005/Atom">
 	<Placemark id="pm251">
               	<name><![CDATA[Everitt to Bear Springs]]></name>
               	<distance><![CDATA[3.0 miles]]></distance>
-              	<description><![CDATA[This trail is fast fun and flowy. It's a newer trail that few people know about and is still a work in progress. A few small jumps and a nice size log jump.]]></description>
+              	<description><![CDATA[Bear Springs trailhead can be accessed from loggin roads off Everitt Memorial or from the top of Old McCloud Road. After crossing the railroad tracks the trail head will be about 1/4 mile down the road and  down an old dirt road about on the left hand side]]></description>
               	<category>dh</category>
 
 <Polygon id="g868">

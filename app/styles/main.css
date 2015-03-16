@@ -8144,7 +8144,7 @@ button.close {
     display: none !important;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\000036}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\000037}}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -8153,7 +8153,7 @@ button.close {
 }
 
 /* Space out content a bit */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000314}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000315}}
 body {
   padding-top: 20px;
   padding-bottom: 20px;
@@ -8161,7 +8161,7 @@ body {
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000321}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000322}}
 .header,
 .marketing,
 .footer {
@@ -8170,11 +8170,11 @@ body {
 }
 
 /* Custom page header */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000329}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000330}}
 .header {
   /* Make the masthead heading the same height as the navigation */
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000333}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000334}}
 .header h3 {
   margin-top: 0;
   margin-bottom: 0;
@@ -8183,49 +8183,49 @@ body {
 }
 
 /* Custom page footer */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000342}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000343}}
 .footer {
   padding-top: 19px;
-  color: #777;
+  color: #777777;
   border-top: 1px solid #e5e5e5;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000348}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000349}}
 .container-narrow > hr {
   margin: 30px 0;
 }
 
 /* Main marketing message and sign up button */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000353}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000354}}
 .jumbotron {
   text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000357}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000358}}
 .jumbotron .btn {
   font-size: 21px;
   padding: 14px 24px;
 }
 
 /* Supporting marketing content */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000364}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000365}}
 .marketing {
   margin: 40px 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000367}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000368}}
 .marketing p + h4 {
   margin-top: 28px;
 }
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000374}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000375}}
   .container {
     max-width: 730px;
   }
 
   /* Remove the padding we set earlier */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000388}}
   .header,
   .marketing,
   .footer {
@@ -8236,48 +8236,48 @@ body {
 
   /* Space out the masthead */
   /* Remove the bottom border on the jumbotron for visual effect */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000399}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003100}}
   .jumbotron {
     border-bottom: 0;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003104}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003105}}
 html, body, .map-container, .container-fluid {
-  width: 100%;
-  height: 90%;
+  width: 100vw;
+  height: 99vh;
   margin: 0;
   padding: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003110}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003111}}
 map {
   position: relative;
   height: 100% !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003114}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003115}}
 .row {
   margin: 0px !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003117}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003118}}
 .tracking-icon {
   margin-left: 1em;
   font-size: 1.2em;
   vertical-align: middle;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003123}}
-.sidr-close, .sidr-expand {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003124}}
+.sidr-close, .ng-modal-close, .sidr-expand {
   cursor: pointer;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003125}}
-.sidr-close:hover, .sidr-expand:hover {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003126}}
+.sidr-close:hover, .ng-modal-close:hover, .sidr-expand:hover {
   color: #fa5519;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003130}}
-.main-menu .sidr-close {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003131}}
+.main-menu .sidr-close, .main-menu .ng-modal-close {
   right: 0.5em;
   margin-right: 1em;
   margin-top: 15px;
@@ -8285,50 +8285,46 @@ map {
   padding-left: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003139}}
 #sidr-left {
   bottom: 0px;
   width: 100%;
-  height: 150px;
+  height: 30vh;
   right: auto;
   top: inherit;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003144}}
-#sidr-left .sidr-close {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003145}}
+#sidr-left .sidr-close, #sidr-left .ng-modal-close {
   right: 2em;
   top: 1.6em;
   position: absolute;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003149}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003150}}
 #sidr-left .sidr-expand {
   display: inline-block;
   position: relative;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003153}}
-#sidr-left .sidr-close:hover, #sidr-left .sidr-expand:hover {
-  color: #fa5519;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003156}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003154}}
 #sidr-left .comments {
   font-size: 0.65em;
   padding-left: 0.35em;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003159}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003157}}
 #sidr-left .comments a {
   cursor: pointer;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003163}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003161}}
 #sidr-left .left {
   margin-left: 2em;
   position: absolute;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003169}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003167}}
 .expanded {
   height: 75% !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003175}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003173}}
 input[type=checkbox] {
   /* Double-sized Checkboxes */
   -ms-transform: scale(2);
@@ -8342,26 +8338,26 @@ input[type=checkbox] {
   padding: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003185}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003183}}
 .menu-item {
   display: block;
   line-height: 60px;
   height: auto;
   border-top: 1px solid white;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003190}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003188}}
 .menu-item li {
   cursor: pointer;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003194}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003192}}
 .category {
   left: 10px;
   position: relative;
   font-size: 1.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003199}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003197}}
 .category-checkbox {
   position: relative;
   margin: 0px !important;
@@ -8373,7 +8369,7 @@ input[type=checkbox] {
   margin-bottom: 10px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003211}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003209}}
 .ride-checkbox {
   display: inline-block !important;
   padding: 0px !important;
@@ -8384,7 +8380,7 @@ input[type=checkbox] {
   margin-top: 17px !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003221}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003219}}
 .ride-name {
   display: block !important;
   letter-spacing: 0.1em;
@@ -8397,37 +8393,41 @@ input[type=checkbox] {
   margin-right: 0px !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003234}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003232}}
 .layer-description, .layer-distance, .comment-section {
   display: inline-block;
   font-size: 1em;
   padding: 0.5em 2.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003239}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003237}}
 .layer-distance {
   margin-top: 15px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003242}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003240}}
 .comment-section {
   width: 100%;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003244}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003242}}
 .comment-section .comment-box {
   width: 100%;
   padding: 1em;
   background-color: gray;
   border: 1px solid white;
+  margin-bottom: 1.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003252}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003251}}
 .add-comment {
+  display: block;
   padding-left: 2.5em;
   cursor: pointer;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003256}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003258}}
 .spinner {
   width: 15px;
   height: 15px;
@@ -8462,23 +8462,23 @@ input[type=checkbox] {
     opacity: 0;
   }
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003289}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003291}}
 h2 {
   margin-top: 0px;
   margin-bottom: 13px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003293}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003295}}
 .btn {
   border-radius: 0px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003296}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003298}}
 .sidr-left {
   width: 20% !important;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003300}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003302}}
 .contact {
   cursor: pointer;
   display: block;
@@ -8491,7 +8491,7 @@ h2 {
   letter-spacing: 0.1em;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003312}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003314}}
 .landscape {
   position: absolute;
   display: block;
@@ -8499,7 +8499,7 @@ h2 {
   z-index: 9999;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003319}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003321}}
 .loader {
   height: 20px;
   width: 20px;
@@ -8510,40 +8510,105 @@ h2 {
 /*
   Set the color of the icon
 */
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003329}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003331}}
 svg path,
 svg rect {
   fill: #FF6700;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003334}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003336}}
 .btn-primary {
   background-color: #ff8c29;
   border-radius: 3px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003337}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003339}}
 .btn-primary:hover {
   background-color: #ff8c29;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003340}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003342}}
 .btn-primary:focus {
   background-color: #ff8c29;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003344}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003346}}
 .btn-default {
   border-color: #ff8c29;
   background-color: #2e6da4;
   border-radius: 3px;
   color: #ffffff;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003349}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003351}}
 .btn-default:hover {
   background-color: #2e6da4;
   color: #ffffff;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003353}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003355}}
 .btn-default:focus {
   background-color: #2e6da4;
   color: #ffffff;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003366}}
+.ng-modal-overlay {
+  /* A dark translucent div that covers the whole screen */
+  position: absolute;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 0.8;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003377}}
+.ng-modal-dialog {
+  /* A centered div above the overlay with a box shadow. */
+  z-index: 999999;
+  position: absolute;
+  width: 50%;
+  /* Default */
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 4px 4px 80px #000;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003391}}
+.ng-modal-dialog-content {
+  padding: 10px;
+  text-align: left;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003394}}
+.ng-modal-dialog-content p {
+  font-size: 1.5em;
+  color: #777777;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003398}}
+.ng-modal-dialog-content .input-group {
+  margin-bottom: 2em;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003401}}
+.ng-modal-dialog-content button {
+  margin-top: 2em;
+  font-size: 1.5em;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003406}}
+.ng-modal-close {
+  color: #333;
+  font-size: 1.5em;
+  margin-top: 1.5em;
+  margin-right: 1.5em;
+  text-align: right;
+  display: block;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\00003416}}
+#comment-text {
+  height: 30vh;
 }

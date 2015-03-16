@@ -3,6 +3,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 $orage: #fa5519;
+$grey: #777777;
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -41,7 +42,7 @@ body {
 /* Custom page footer */
 .footer {
   padding-top: 19px;
-  color: #777;
+  color: $grey;
   border-top: 1px solid #e5e5e5;
 }
 
@@ -102,8 +103,8 @@ body {
 }
 
 html, body, .map-container, .container-fluid {
-    width: 100%;
-    height: 90%;
+    width: 100vw;
+    height: 99vh;
     margin: 0;
     padding: 0;
 }
@@ -121,7 +122,7 @@ map {
 }
 
 .sidr-close, .sidr-expand {
-  cursor: pointer;
+  cursor: pointer; 
   &:hover {
     color: $orage;
   }
@@ -138,7 +139,7 @@ map {
 #sidr-left {
   bottom: 0px;
   width: 100%;
-  height: 150px;
+  height: 30vh;
   right: auto;
   top: inherit;
     .sidr-close {
@@ -149,9 +150,6 @@ map {
     .sidr-expand {
       display: inline-block;
       position: relative;
-    }
-    .sidr-close:hover, .sidr-expand:hover {
-      color: $orage;
     }
     .comments {
       font-size: 0.65em;
@@ -246,12 +244,16 @@ margin-right: 0px !important;
     padding: 1em;
     background-color: gray;
     border: 1px solid white;
+    margin-bottom: 1.5em;
 
   }
 }
 .add-comment {
+  display: block;
   padding-left: 2.5em;
   cursor: pointer;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
 }
 .spinner {
 width: 15px;
@@ -355,4 +357,62 @@ svg rect{
     color: #ffffff;
   }
 
+}
+
+
+// =======================================================================================================================
+// =======================================================================================================================
+
+.ng-modal-overlay {
+  /* A dark translucent div that covers the whole screen */
+  position:absolute;
+  z-index: 999999;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:#000000;
+  opacity: 0.8;
+}
+.ng-modal-dialog {
+  /* A centered div above the overlay with a box shadow. */
+  z-index: 999999;
+  position: absolute;
+  width: 50%; /* Default */
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  background-color: #fff;
+  box-shadow: 4px 4px 80px #000;
+}
+.ng-modal-dialog-content {
+  padding:10px;
+  text-align: left;
+    p {
+      font-size: 1.5em;
+      color: $grey;
+    }
+    .input-group {
+      margin-bottom: 2em;
+    }
+    button {
+      margin-top: 2em;
+      font-size: 1.5em;
+    }
+}
+.ng-modal-close {
+  @extend .sidr-close;
+  color: #333;
+  font-size: 1.5em; 
+  margin-top: 1.5em;
+  margin-right: 1.5em;
+  text-align: right;
+  display: block;
+}
+
+#comment-text {
+  height: 30vh;
 }
