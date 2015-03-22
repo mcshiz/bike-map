@@ -45,7 +45,7 @@ angular.module('bikeMapApp')
 })
 .directive('commentArea', function() {
   return {
-    restrict: 'EAC',
+    restrict: 'E',
     scope: true,
     replace: true,
     transclude: true,
@@ -164,22 +164,23 @@ function useTheData(doc){
             strokeWeight: placemark.polyline.get('strokeWeight'),
             strokeOpacity: placemark.polyline.get('strokeOpacity'),
             };
-        
+        highlightLayer(placemark.polyline, i, l);
         placemark.polyline.normalStyle = normalStyle;
-        highlightPoly(placemark.polyline, i, geoXmlDoc[l], l );
       }
 
       if (placemark.marker) {
         if (placemark.marker.id == "start") {
-          placemark.marker.setOptions({map: $scope.myMap, icon: "images/start-flag.png", scale: 0.5})
+          placemark.marker.setOptions({map: $scope.myMap, icon: "images/start-flag.png", scale: 0.5});
           }
         if (placemark.marker.id == "end") {
-          placemark.marker.setOptions({map: $scope.myMap, icon: "images/end-flag.png"})
+          placemark.marker.setOptions({map: $scope.myMap, icon: "images/end-flag.png"});
         }
         if (placemark.marker.id == "loop") {
-          placemark.marker.setOptions({map: $scope.myMap, icon: "images/loop-flag.png"})
-        }   
-        highlightMarker(placemark.marker, i, geoXmlDoc[l] ) 
+          placemark.marker.setOptions({map: $scope.myMap, icon: "images/loop-flag.png"});
+        }
+      highlightLayer(placemark.marker, i, l);
+        
+
       };// end if marker
     };//end placemarks for loop
     $scope.showDocument(geoXmlDoc[l])
@@ -323,46 +324,45 @@ var highlightOptions = {fillColor: "#FFFFFF",Color: "#FFFFFF", strokeColor: "#08
 var highlightLineOptions = {strokeColor: "#fa5519", strokeWidth: 10, color: "#ffffff"};
 var hidden = {visibility: 0};
 
-var on = false;
-$scope.arrgh = true;
-function highlightPoly(poly, polynum, layer, layerNumber) {
-  google.maps.event.addListener(poly,"click",function() {
-    $scope.displayInfo(poly)
-    $scope.currentHighlightedLayer = $scope.myTrails[layer.doc];
-    console.log($scope.currentHighlightedLayer);
-    $scope.hideOtherMarkers(layer);
-    $scope.showComments(layer, layerNumber)
-$scope.arrgh = false;
-console.log($scope.arrgh)
-    $scope.$apply() 
-  }); 
-}8 
 
-function highlightMarker(marker, polynum, layer, layerNumber) {
-  google.maps.event.addListener(marker,"click",function() {
-    var trail = layer.placemarks[1].polyline;
-    $scope.displayInfo(trail, marker);
-    $scope.currentHighlightedLayer = $scope.myTrails[layer.doc];
-    $scope.hideOtherMarkers(layer);
-    $scope.showComments(layer)
-    $scope.arrgh = false
-    console.log($scope.arrgh)
-      $scope.$apply() 
-  });
-};
+
+
+var highlightLayer = function(poly, polynum, layer, marker){
+
+  if (typeof(poly !== 'undefined')){
+  google.maps.event.addListener(poly,"click",function() {
+     $scope.layerClicked(poly, layer);
+    });
+  } else if (typeof(marker !== 'undefined')) {
+    google.maps.event.addListener(marker,"click",function() {
+      var trail = layer.placemarks[1].polyline;
+      $scope.layerClicked(trail, layer)
+    });
+  }
+
+}
+
+$scope.layerClicked = function(part, layer){
+  if ($scope.currentHighlightedLayer !== null){
+    $scope.unHighlightPoly($scope.currentHighlightedLayer);
+  }
+    $scope.currentHighlightedLayer = $scope.myTrails[layer];
+    $scope.displayInfo(part, $scope.currentHighlightedLayer);
+    $scope.hideOtherMarkers($scope.currentHighlightedLayer);
+  };
 
 
 $scope.showComments = function(layer){
-
-  var layercomments = $scope.myTrails[layer.doc].comments;
+  var layercomments = layer.comments;
   $scope.numberOfComments = 0
-  
      angular.forEach(layercomments, function(key, value){
         $scope.numberOfComments++;
         $('.numberOfComments').html($scope.numberOfComments);
     })
 }
 
+
+    
 
 $scope.hideOtherMarkers = function(layer){
   for (var i=0; i < $scope.myTrails.length; i++){
@@ -372,8 +372,9 @@ $scope.hideOtherMarkers = function(layer){
         m++;
     }
   }
-  if(typeof(layer) !== 'undefined'){
+  if(layer){
     for (var i=0; i < $scope.myTrails.length; i++){
+      //hiding other markers with differnt doc numbers
       if (geoXmlDoc[i].doc != layer.doc ){
         var m = 0;
         while (typeof geoXmlDoc[i].markers[m] != 'undefined'){
@@ -387,30 +388,27 @@ return;
 };
 
 
-
-
+var on = false;
 $scope.displayInfo = function(poly, layer){
-    if (!!$scope.highlightedLayer){
-      $scope.unHighlightPoly($scope.highlightedLayer);
-      $scope.highlightedLayer = null;
-    }
-    if (on === false){
-      poly.setOptions(highlightLineOptions);
-      $scope.highlightedLayer = poly;
-      on = !on;
-      showInContextWindow(poly.title, poly.description, poly.distance)
+    if ($scope.currentHighlightedLayer !== null){
+      // hightlight polyline
+      layer.trail.setOptions(highlightLineOptions);
+      // fill in slider information
+      showInContextWindow(layer.trail.title, layer.trail.description, layer.trail.distance);
+      $scope.showComments($scope.currentHighlightedLayer);
+      // open slider
       $.sidr('open', 'sidr-left');
     } else {
-      $scope.unHighlightPoly(poly)
-      $scope.sidrClose(on, poly)
+      $scope.unHighlightPoly(layer);
+      $scope.sidrClose(on, layer);
+
     }
-    $scope.hideOtherMarkers(layer);
+     
+
 };
 
-$scope.unHighlightPoly = function(poly) {
-  poly.setOptions(poly.normalStyle);
-  on = !on;
-  $scope.currentHighlightedLayer = null;
+$scope.unHighlightPoly = function(layer) {
+  layer.trail.setOptions(layer.trail.normalStyle);
 };
 
 
@@ -581,7 +579,6 @@ function updateMapPosition(latitude, longitude){
       side: "right",
     });
 
-  var on = false;
 
 
 var showInContextWindow = function(title, description, distance, comments) {
@@ -591,10 +588,10 @@ var showInContextWindow = function(title, description, distance, comments) {
 };//end showincontext
 
 $scope.sidrClose = function(poly){
-  if (poly){
-    $scope.unHighlightPoly(poly);
-    $scope.highlightedLayer = null;
+  if (!poly){
+    $scope.unHighlightPoly($scope.currentHighlightedLayer);
     $scope.hideOtherMarkers();
+    $scope.currentHighlightedLayer = null;
   }
 
   $.sidr('close', 'sidr-left');

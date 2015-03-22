@@ -52,7 +52,7 @@
   <span class="add-comment"><a ng-click="toggleModal()">Add A Comment</a></span>
   <span class="comment-section">
     <comment-area ></comment-area>
-    
+
   </span>
    
 
@@ -68,14 +68,14 @@
     <ul class="xc-trails text-center">
       <li ng-repeat="trail in myTrails | filter: {category: 'xc'} track by $index">                      
         <input class="ride-checkbox" type="checkbox" ng-model="trail.visible" ng-change="toggleTrail(trail.visible, trail.doc)">
-        <b class="ride-name" ng-click="displayInfo(trail.trail, trail)">{{trail.name}}</b>
+        <b class="ride-name" ng-click="layerClicked(trail, $index)">{{trail.name}}</b>
       </li>
     </ul>
     <span class="category" style="display:inline-block">Downhill Trails</span>
     <ul class="dh-trails text-center">
       <li ng-repeat="trail in myTrails | filter: {category: 'dh'} track by $index" >
         <input class="ride-checkbox" type="checkbox" ng-model="trail.visible"  ng-change="toggleTrail(trail.visible, trail.doc)">
-        <b class="ride-name" ng-click="displayInfo(trail.trail, trail)">{{trail.name}}</b>
+        <b class="ride-name" ng-click="layerClicked(trail, $index)">{{trail.name}}</b>
       </li>     
     </ul>                  
   </span>
