@@ -37,7 +37,7 @@ angular.module('bikeMapApp')
         "<div class='comment-textarea'>"+
           "<textarea class='form-control input-lg' name='comment-text' id='comment-text' placeholder='Comment...'></textarea>"+
         "</div>"+
-        "<button class='btn btn-primary input-lg form-control text-center' ng-click='addComment()'>Submit</button>"+
+        "<button class='btn btn-primary input-lg form-control text-center' ng-click='addComment($scope.addComments)'>Submit</button>"+
       "</div>"+
     "</div>"+
     "</div>" 
@@ -51,8 +51,7 @@ angular.module('bikeMapApp')
     transclude: true,
     link: function(scope, element, attrs) {
     scope.$watch('currentHighlightedLayer.doc', function(obj) {
-console.log()
-      }, true);
+      });
     },
     template: "<div class='comment-box' ng-repeat='comment in currentHighlightedLayer.comments'>"+
       "<span class='username'>{{comment.name}} said:</span>"+
@@ -199,7 +198,7 @@ var obj = $firebaseObject(ref);
 
 
 $scope.addComments = function() {
-
+  console.log(i);
   for (var i in $scope.myTrails) {
     angular.forEach(obj, function(key, value){
       if (value == $scope.myTrails[i].name){
@@ -207,9 +206,10 @@ $scope.addComments = function() {
       }
     });
   }
+  console.log(i);
 };
 
-$scope.addComment = function(){
+$scope.addComment = function(callback){
   var newCommentNumber = ($scope.numberOfComments + 1);
   var commentText = $('#comment-text').val();
   var commentName = $('#name').val();
@@ -219,10 +219,14 @@ $scope.addComment = function(){
   var newCommentRef = trailRef.child('/c'+newCommentNumber);
   var trailCommentRefObj = $firebaseObject(newCommentRef);
   var unwatch = trailCommentRefObj.$watch(function() {
-  console.log("data changed!");
-  })
+ newCommentNumber++;
   newCommentRef.set({comment: commentText, name: commentName, date: commentDate});
+  $scope.$apply();
+  })
   $scope.hideModal();
+  if(callback){
+    callback(trailRef)
+  }
 }
 
 
@@ -332,11 +336,15 @@ var highlightLayer = function(poly, polynum, layer, marker){
   if (typeof(poly !== 'undefined')){
   google.maps.event.addListener(poly,"click",function() {
      $scope.layerClicked(poly, layer);
+      $scope.$apply()
+
     });
   } else if (typeof(marker !== 'undefined')) {
     google.maps.event.addListener(marker,"click",function() {
       var trail = layer.placemarks[1].polyline;
       $scope.layerClicked(trail, layer)
+      $scope.$apply()
+
     });
   }
 
@@ -349,15 +357,15 @@ $scope.layerClicked = function(part, layer){
     $scope.currentHighlightedLayer = $scope.myTrails[layer];
     $scope.displayInfo(part, $scope.currentHighlightedLayer);
     $scope.hideOtherMarkers($scope.currentHighlightedLayer);
+
   };
 
 
 $scope.showComments = function(layer){
   var layercomments = layer.comments;
-  $scope.numberOfComments = 0
+  $scope.numberOfComments = 0;
      angular.forEach(layercomments, function(key, value){
         $scope.numberOfComments++;
-        $('.numberOfComments').html($scope.numberOfComments);
     })
 }
 
@@ -395,7 +403,7 @@ $scope.displayInfo = function(poly, layer){
       layer.trail.setOptions(highlightLineOptions);
       // fill in slider information
       showInContextWindow(layer.trail.title, layer.trail.description, layer.trail.distance);
-      $scope.showComments($scope.currentHighlightedLayer);
+       $scope.showComments($scope.currentHighlightedLayer);
       // open slider
       $.sidr('open', 'sidr-left');
     } else {

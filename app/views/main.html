@@ -40,7 +40,7 @@
     <div class="pull-left left">
       <b class="glyphicon glyphicon-chevron-up sidr-expand" ng-click="sidrExpand()"></b>
       <span class="comments" ng-click="sidrExpand()">
-        <a>Comments (<span class="numberOfComments"></span>)</a>
+        <a>Comments (<span ng-bind="numberOfComments"></span>)</a>
       </span>
     </div>
     <span class="layer-title text-center" ></span>
@@ -49,7 +49,7 @@
   <br>  
   <span class="layer-description"></span>
   <span class="layer-distance"></span>
-  <span class="add-comment"><a ng-click="toggleModal()">Add A Comment</a></span>
+  <span class="add-comment"><a ng-click="toggleModal()">Add A Comment <span class="glyphicon glyphicon-plus"></span></a></span>
   <span class="comment-section">
     <comment-area ></comment-area>
 
@@ -68,7 +68,7 @@
     <ul class="xc-trails text-center">
       <li ng-repeat="trail in myTrails | filter: {category: 'xc'} track by $index">                      
         <input class="ride-checkbox" type="checkbox" ng-model="trail.visible" ng-change="toggleTrail(trail.visible, trail.doc)">
-        <b class="ride-name" ng-click="layerClicked(trail, $index)">{{trail.name}}</b>
+        <b class="ride-name" ng-click="layerClicked(trail, trail)">{{trail.name}}</b>
       </li>
     </ul>
     <span class="category" style="display:inline-block">Downhill Trails</span>

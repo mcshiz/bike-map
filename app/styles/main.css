@@ -370,8 +370,8 @@ th {
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/bower_components\/bootstrap-sass-official\/assets\/stylesheets\/bootstrap\/_glyphicons\.scss}line{font-family:\0000321}}
 .glyphicon {
@@ -8172,6 +8172,7 @@ body {
 /* Custom page header */
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000330}}
 .header {
+  background-color: #333333 !important;
   /* Make the masthead heading the same height as the navigation */
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/brian\/Documents\/portfolio\/bike-map\/app\/styles\/main\.scss}line{font-family:\0000334}}
@@ -8612,3 +8613,4 @@ svg rect {
 #comment-text {
   height: 30vh;
 }
+
