@@ -1,0 +1,18 @@
+  <br>
+  <span  class="text-center" style="width:100%; display: inline-block; font-size:1.5em; border-bottom: 3px solid #0D4A0E; border-top: 3px solid #0D4A0E;padding: 5px 0px;">
+    <div class="pull-left left">
+      <b class="glyphicon glyphicon-chevron-up sidr-expand" ng-click="sidrExpand()"></b>
+      <span class="comments" ng-click="sidrExpand()">
+        <a>Comments (<span ng-bind="numberOfComments"></span>)</a>
+      </span>
+    </div>
+    <span class="layer-title text-center" ></span>
+    <b class="glyphicon glyphicon-remove sidr-close" ng-click="sidrClose(highlightedLayer)"></b>
+  </span>
+  <br>  
+  <span class="layer-description"></span>
+  <span class="layer-distance"></span>
+  <span class="add-comment"><a ng-click="toggleModal()">Add A Comment <span class="glyphicon glyphicon-plus"></span></a></span>
+  <span class="comment-section">
+    <comment-area ></comment-area>
+  </span>

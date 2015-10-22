@@ -24,23 +24,7 @@ angular.module('bikeMapApp')
         scope.shown = attrs.shown;
 
     },
-    template: "<div class='ng-modal {{modalShown}}' >"+
-    "<div class='ng-modal-overlay' ng-click='hideModal()'></div>"+
-    "<div class='ng-modal-dialog' ng-style='dialogStyle'>"+
-      "<b class='glyphicon glyphicon-remove ng-modal-close' ng-click='hideModal()'></b>"+
-      "<div class='ng-modal-dialog-content'>"+
-        "<p>Add your comment for {{currentHighlightedLayer.name}}</p>"+
-        "<div class='input-group'>"+
-          "<span class='input-group-addon' id='name-addon'>name</span>"+
-          "<input type='text' class='form-control input-lg'  aria-describedby='name-addon' id='name'>"+
-        "</div>"+
-        "<div class='comment-textarea'>"+
-          "<textarea class='form-control input-lg' name='comment-text' id='comment-text' placeholder='Comment...'></textarea>"+
-        "</div>"+
-        "<button class='btn btn-primary input-lg form-control text-center' ng-click='addComment($scope.addComments)'>Submit</button>"+
-      "</div>"+
-    "</div>"+
-    "</div>" 
+     templateUrl: '/scripts/directives/modal.html'
   };
 })
 .directive('commentArea', function() {
@@ -53,26 +37,26 @@ angular.module('bikeMapApp')
     scope.$watch('currentHighlightedLayer.doc', function(obj) {
       });
     },
-    template: "<div class='comment-box' ng-repeat='comment in currentHighlightedLayer.comments'>"+
-      "<span class='username'>{{comment.name}} said:</span>"+
-      "<br>"+
-      "<span class='comment'>{{comment.comment}}</span>"+
-      "<br>"+
-      "<span class='date'>{{comment.date}}</span>"+
-    "</div>"
+    templateUrl: '/scripts/directives/comment-area.html'
   };
 })
-
-
-
-  .controller('MainCtrl', function ($scope, $location, $firebaseObject, localStorageService) {
+.directive('trailInfo', function() {
+  return {
+    restrict: 'E',
+    scope: true,
+    replace: true,
+    transclude: true,
+    link: function(scope, element, attrs) {
+    scope.$watch('currentHighlightedLayer.doc', function(obj) {
+      });
+    },
+    templateUrl: '/scripts/directives/trailInfo.html'
+  };
+})
+.controller('MainCtrl', function ($scope, $location, $firebaseObject, localStorageService) {
 
   $scope.currentHighlightedLayer = null;
-
-
-
   $scope.$on('mapInitialized', function(event, map) {
-
   $scope.map = { 
     coords: '41.322907,-122.274731 ',
     zoom: '13',
@@ -151,6 +135,7 @@ function useTheData(doc){
           name: $.trim(doc[l].placemarks[1].name),
           visible: true,
           trail: doc[l].placemarks[1].polyline,
+          comments: {}
         });
       $scope.$apply()
 
@@ -192,21 +177,25 @@ var ref = new Firebase("https://bike-map.firebaseio.com/comments/trail");
 
 var obj = $firebaseObject(ref);
   obj.$loaded().then(function() {
-  $scope.addComments();
   return obj;
 });
 
-
-$scope.addComments = function() {
-  console.log(i);
-  for (var i in $scope.myTrails) {
-    angular.forEach(obj, function(key, value){
-      if (value == $scope.myTrails[i].name){
-       $scope.myTrails[i].comments = key;
-      }
+// when a layer is clicked get the comments from firebase and add them to this trail layer
+$scope.addComments = function(layer) {
+  var i = 0;
+  var trailRef = ref.child($scope.currentHighlightedLayer.name);
+  //once we get the data from firebase we then have a snapshot of the data
+  trailRef.once("value", function(snapshot) {
+    // The callback function will get called for each child
+    snapshot.forEach(function(childSnapshot) {
+      var key = childSnapshot.key();
+      //child data is an object {comment: comment, date: date, name: name}
+      var childData = childSnapshot.val();
+      layer.comments[key] = childData;
+      i++;
+      layer.numberOfComments = i;
     });
-  }
-  console.log(i);
+  });
 };
 
 $scope.addComment = function(callback){
@@ -230,12 +219,13 @@ $scope.addComment = function(callback){
 }
 
 
+
 //========================================================================================================================
 //========================================================================================================================
 //========================================================================================================================
 var getTodaysDate = function (){
 var currentYear = (new Date).getFullYear();
-var currentMonth = (new Date).getMonth() + 1;
+var currentMonth = '';
 var currentDay = (new Date).getDate();
 var month = new Array();
 month[0] = "January";
@@ -250,7 +240,7 @@ month[8] = "September";
 month[9] = "October";
 month[10] = "November";
 month[11] = "December";
-currentMonth = month[ (new Date).getMonth()];
+currentMonth = month[(new Date).getMonth()];
 
 return (currentMonth + " " + currentDay +", "+ currentYear);
 
@@ -272,6 +262,8 @@ $scope.showDocument = function (doc) {
     if (!doc) doc = doc[0];
     // Show the map objects associated with a document
     var i;
+
+    // var polyTypes = [markers, ggroundoverlays, gpolylines, gpolygons]
     if (!!doc.markers) {
       for (i = 0; i < doc.markers.length; i++) {
         doc.markers[i].setVisible(true);
@@ -336,6 +328,8 @@ var highlightLayer = function(poly, polynum, layer, marker){
   if (typeof(poly !== 'undefined')){
   google.maps.event.addListener(poly,"click",function() {
      $scope.layerClicked(poly, layer);
+     console.log(poly)
+
       $scope.$apply()
 
     });
@@ -355,6 +349,10 @@ $scope.layerClicked = function(part, layer){
     $scope.unHighlightPoly($scope.currentHighlightedLayer);
   }
     $scope.currentHighlightedLayer = $scope.myTrails[layer];
+
+    $scope.addComments($scope.myTrails[layer])
+    console.log("hey")
+    console.log($scope.myTrails[layer]);
     $scope.displayInfo(part, $scope.currentHighlightedLayer);
     $scope.hideOtherMarkers($scope.currentHighlightedLayer);
 
@@ -567,9 +565,6 @@ function updateMapPosition(latitude, longitude){
 //========================================================================================================================
 
 
-
-
-
   $('#simple-menu').sidr({
       name:"sidr-left",
       displace: false,
@@ -586,8 +581,6 @@ function updateMapPosition(latitude, longitude){
       displace: false,
       side: "right",
     });
-
-
 
 var showInContextWindow = function(title, description, distance, comments) {
   $('#sidr-left .layer-title').text(title);
@@ -635,8 +628,8 @@ $scope.sidrExpand = function () {
 }
 
 $scope.changeView = function(view){
-    $scope.sidrCloseRight();
-    $location.path(view); // path not hash
+  $scope.sidrCloseRight();
+  $location.path(view); // path not hash
 }
 $scope.hideModal = function() {
   $scope.modalShown = 'ng-hide';

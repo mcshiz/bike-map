@@ -1,0 +1,17 @@
+<div class='ng-modal {{modalShown}}' >
+  <div class='ng-modal-overlay' ng-click='hideModal()'></div>
+  <div class='ng-modal-dialog' ng-style='dialogStyle'>
+    <b class='glyphicon glyphicon-remove ng-modal-close' ng-click='hideModal()'></b>
+    <div class='ng-modal-dialog-content'>
+      <p>Add your comment for {{currentHighlightedLayer.name}}</p>
+      <div class='input-group'>
+        <span class='input-group-addon' id='name-addon'>name</span>
+        <input type='text' class='form-control input-lg'  aria-describedby='name-addon' id='name'>
+      </div>
+      <div class='comment-textarea'>
+        <textarea class='form-control input-lg' name='comment-text' id='comment-text' placeholder='Comment...'></textarea>
+      </div>
+      <button class='btn btn-primary input-lg form-control text-center' ng-click='addComment(addComments)'>Submit</button>
+    </div>
+  </div>
+</div>
